@@ -14,7 +14,7 @@ Core Java +JPA with Hibernate
 Spring Boot + Rest Controller + JPA with Hibernate
 
 Modules:
-1.Admin Module
-2.Customer Module
-3.Ticket Module
-4.Activity Module
+1. Admin Module
+2. Customer Module
+3. Ticket Module
+4. Activity Module
