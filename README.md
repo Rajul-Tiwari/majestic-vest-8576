@@ -10,8 +10,8 @@ Admin should be able to perform below operations:
 Road Map:
 
 Application will be developed in following Sprints:
-Core Java +JPA with Hibernate 
-Spring Boot + Rest Controller + JPA with Hibernate
+- Core Java +JPA with Hibernate 
+- Spring Boot + Rest Controller + JPA with Hibernate
 
 Modules:
 1. Admin Module
