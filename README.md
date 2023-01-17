@@ -8,6 +8,7 @@ Admin should be able to perform below operations:
 2. Customer Management
 
 Road Map:
+--------------------------------------------------------------
 
 Application will be developed in following Sprints:
 - Core Java +JPA with Hibernate 
