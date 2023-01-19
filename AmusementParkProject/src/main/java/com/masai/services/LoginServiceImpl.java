@@ -36,13 +36,13 @@ public class LoginServiceImpl implements LoginService{
 		if(existingCustomer == null) {
 			throw new LoginException("Please Enter a valid email or password");
 		}
-		Optional<CurrentUserSession> validCustomerSessionOpt =  sDao.findById(existingCustomer.getCustomerId());
+		Optional<CurrentUserSession> validCustomerSessionOpt =  sDao.findById(existingCustomer.getCustomerID());
 		if(validCustomerSessionOpt.isPresent()) {
 			throw new LoginException("User already Logged In with this number");
 		}
 		if(existingCustomer.getPassword().equals(dto.getPassword())) {
 			String key= RandomString.make(6);
-			CurrentUserSession currentUserSession = new CurrentUserSession(existingCustomer.getCustomerId(),key,LocalDateTime.now());
+			CurrentUserSession currentUserSession = new CurrentUserSession(existingCustomer.getCustomerID(),key,LocalDateTime.now());
 			sDao.save(currentUserSession);
 			return currentUserSession.toString();
 		}
