@@ -16,9 +16,10 @@ public class Ticket {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer TicketId;
-    @ManyToOne
-    private Customer customer;
-    @OneToOne(cascade = CascadeType.ALL)
+
+    @OneToOne( cascade = CascadeType.ALL)
     private Activity activity;
     private LocalDateTime dateTime;
+    @ManyToOne
+    private Customer customer;
 }

@@ -1,9 +1,6 @@
 package com.masai.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
@@ -15,7 +12,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Data
+import java.util.List;
+
+
 @Getter
 @Setter
 @NoArgsConstructor
@@ -39,6 +38,8 @@ public class Customer {
 
 	@Email
     private String email;
+    @OneToMany(cascade = CascadeType.ALL,mappedBy = "customer")
+    private List<Ticket> tickets;
 
     
 
