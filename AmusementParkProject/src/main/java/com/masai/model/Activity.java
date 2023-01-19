@@ -18,6 +18,6 @@ public class Activity {
     private Integer activityId;
     private String Description;
     private Float charge;
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne
     private Ticket ticket;
 }
