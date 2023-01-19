@@ -6,6 +6,8 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.Getter;
@@ -38,6 +40,7 @@ public class Customer {
 
 	@Email
     private String email;
+	@JsonIgnore
     @OneToMany(cascade = CascadeType.ALL,mappedBy = "customer")
     private List<Ticket> tickets;
 
