@@ -34,14 +34,7 @@ public class LoginController {
     @Autowired
 	private LoginService customerLogin;
     
-    @PostMapping("/registerCustomer")
-    public ResponseEntity<Customer> createCustomer(@RequestBody Customer customer) throws CustomerException {
-       
-        	  Customer c = cService.regCustomer(customer);
 
-              return new ResponseEntity<Customer>(c, HttpStatus.OK);	
-      
-    }
 
     
 	@PostMapping("/customerlogin")

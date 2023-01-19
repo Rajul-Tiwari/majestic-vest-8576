@@ -9,12 +9,17 @@ import com.masai.model.Customer;
 import com.masai.repository.CustomerDao;
 import com.masai.repository.SessionDao;
 
+import javax.swing.*;
+import java.util.List;
+
 
 @Service
 public class UserServiceImpl implements UserService{
 	
 	@Autowired
 	private CustomerDao cDao;
+
+
 	
 	@Autowired
 	private SessionDao sDao;
@@ -50,9 +55,33 @@ public class UserServiceImpl implements UserService{
 		else
 			throw new CustomerException("Invalid Customer Details, please login first");
 	}
- 
-	
-	
 
-	
+	@Override
+	public String deleteCustomer(Integer customerId) throws CustomerException {
+		CurrentUserSession userSession=sDao.findById(customerId).orElseThrow(()->new CustomerException("Customer not fount with this Id"));
+			Customer customer= cDao.findById(customerId).orElseThrow(()->new CustomerException("Cucstomer not found with thiss id"));
+		if(userSession!=null){
+			sDao.delete(userSession);
+			cDao.delete(customer);
+
+			return "deleted";
+		}
+		throw new CustomerException("Not Deleted");
+
+	}
+
+	@Override
+	public List<Customer> getAllCustomer() throws CustomerException {
+		List<Customer>customer=cDao.findAll();
+
+		if(customer.isEmpty()){
+			throw new CustomerException("Customer not exist");
+		}
+		else{
+			return customer;
+		}
+
+	}
+
+
 }
