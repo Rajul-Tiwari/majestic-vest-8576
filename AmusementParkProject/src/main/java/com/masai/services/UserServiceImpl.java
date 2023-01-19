@@ -43,7 +43,7 @@ public class UserServiceImpl implements UserService{
 		
 	
 		
-		if(customer.getCustomerId() == loggedInUser.getUserId()) {
+		if(customer.getCustomerID()== loggedInUser.getUserId()) {
 			//If LoggedInUser id is same as the id of supplied Customer which we want to update
 			return cDao.save(customer);
 		}
