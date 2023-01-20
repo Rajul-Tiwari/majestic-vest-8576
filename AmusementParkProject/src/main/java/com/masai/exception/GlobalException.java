@@ -19,4 +19,12 @@ public class GlobalException {
 	      err.setDecsription(req.getDescription(false));
 	      return new ResponseEntity<MyErrorDetails>(err,HttpStatus.BAD_REQUEST);
 	}
+	@ExceptionHandler(ActivityException.class)
+	public ResponseEntity<MyErrorDetails> activityException(ActivityException a,WebRequest req){
+		 MyErrorDetails err= new MyErrorDetails();
+	      err.setTimestamp(LocalDateTime.now());
+	      err.setMessege("validation error");
+	      err.setDecsription(req.getDescription(false));
+	      return new ResponseEntity<MyErrorDetails>(err,HttpStatus.BAD_REQUEST);
+	}
 }
