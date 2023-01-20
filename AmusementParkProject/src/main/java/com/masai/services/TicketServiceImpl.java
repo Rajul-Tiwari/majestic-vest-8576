@@ -1,5 +1,6 @@
 package com.masai.services;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -63,5 +64,23 @@ public class TicketServiceImpl implements TicketService {
 		
 		
 		 
+	}
+
+	@Override
+	public Ticket updateTicketBooking(Ticket ticketBooking) throws TicketException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Ticket deleteTicketBooking(Integer ticketId) throws TicketException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Ticket> viewAllTicketCustomer(Integer customerId) throws TicketException {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }
