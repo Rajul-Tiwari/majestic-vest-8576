@@ -32,10 +32,6 @@ public class UserController {
 	private UserService cService;
 	
 	@Autowired
-	private TicketService tService;
-	
-	
-	@Autowired
 	private ActivityService aService;
 	
 	
@@ -82,15 +78,6 @@ public class UserController {
 	}
     
     
-    
-    @PostMapping("/ticketBooking/{activity_id}/{cid}")
-	public ResponseEntity<Ticket> bookticket(@RequestBody Ticket tkt,@PathVariable Integer activity_id,@PathVariable Integer cid) throws TicketException, ActivityException {
-
-		Ticket t = tService.ticketBooking(tkt, activity_id, cid);
-
-		return new ResponseEntity<Ticket>(t, HttpStatus.CREATED);
-
-	}
     
     @GetMapping("/getAllActivity")
     public ResponseEntity<List<Activity>> getAllactivity() throws ActivityException{
