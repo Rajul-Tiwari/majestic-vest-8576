@@ -97,16 +97,18 @@ public class AdminServiceImpl implements AdminService{
 
 	@Override
 	public List<Activity> getActivitiesDatewise(LocalDateTime date) throws ActivityException {
-		System.out.println(date);
-	              List<Ticket> listTicket= tDao.getTicketByDate(date);
-	           List<Activity> listActivity= new ArrayList<>();   
-		                    listTicket.forEach(t->listActivity.add(t.getActivity()));
-		
-		                  if(listActivity.size()==0) {
-		                	  throw new ActivityException("No Activity found");
-		                  } else {
-		                	  return listActivity;
-		                  }
+//		System.out.println(date);
+//	              List<Ticket> listTicket= tDao.getTicketByDate(date);
+//	           List<Activity> listActivity= new ArrayList<>();   
+//		                    listTicket.forEach(t->listActivity.add(t.getActivity()));
+//		
+//		                  if(listActivity.size()==0) {
+//		                	  throw new ActivityException("No Activity found");
+//		                  } else {
+//		                	  return listActivity;
+//		                  }
+		                  
+		                 return null;
 		
 		
 	}

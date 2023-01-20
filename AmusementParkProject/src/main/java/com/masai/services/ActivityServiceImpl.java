@@ -37,8 +37,10 @@ public class ActivityServiceImpl implements ActivityService {
 		act.setDescription(activity.getDescription());
 		act.setCharge(activity.getCharge());
 		
+		Activity updated =aDao.save(act);
 		
-		return act;
+		
+		return updated;
 			
 		}else {
 			
