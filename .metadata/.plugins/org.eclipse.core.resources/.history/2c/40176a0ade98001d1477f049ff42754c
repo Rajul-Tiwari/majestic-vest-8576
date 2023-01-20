@@ -1,0 +1,132 @@
+package com.masai.service;
+
+import java.util.List;
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.masai.exception.EmployeeException;
+import com.masai.model.Address;
+import com.masai.model.Employee;
+import com.masai.model.EmployeeDto;
+
+import com.masai.repository.EmployeeRepo;
+@Service
+public class EmployeeSerImpl implements EmployeeService{
+    @Autowired
+	private EmployeeRepo eRepo;
+	
+	@Override
+	public Employee registerEmployee(Employee employee) throws EmployeeException {
+		        Employee emp=eRepo.save(employee);
+		       return emp;
+	}
+
+	@Override
+	public Employee getEmployeeById(Integer employeeId) throws EmployeeException {
+		      Optional<Employee> opt= eRepo.findById(employeeId);
+		      if(opt.isPresent()) {
+		    	  return opt.get();
+		      } else {
+		    	  throw new EmployeeException("Employee does not found with given id:"+employeeId);
+		      }
+	}
+
+	@Override
+	public Employee loginEmployee(String email, String password) throws EmployeeException {
+		          Employee emp=eRepo.loginStudent(email, password);
+		          
+		          if(emp!=null) {
+		        	  return emp;
+		          } else {
+		        	  throw new EmployeeException("Student does not found with given email and password");
+		          }
+	}
+
+	@Override
+	public Employee updateEmployeePassword(String email, String oldPassword, String newPassword)
+			throws EmployeeException {
+		                       Employee emp=eRepo.loginStudent(email, oldPassword);
+		                       if(emp!=null) {
+		                    	   emp.setPassword(newPassword);
+		                    	 Employee ep=  eRepo.save(emp);
+		                    	 return ep;
+		                       } else {
+		                    	   throw new EmployeeException("Student does not found with given email and password");
+		                       }
+	}
+
+	@Override
+	public List<Employee> getAllEmployeeDetails() throws EmployeeException {
+		                     List<Employee> listemp= eRepo.findAll();
+		                     
+		                     if(listemp.size()==0) {
+		                    	 throw new EmployeeException("Student does not found");
+		                     } else {
+		                    	 return listemp;
+		                     }
+	}
+
+	@Override
+	public Employee deleteEmployeeById(Integer employeeId) throws EmployeeException {
+		 Optional<Employee> opt= eRepo.findById(employeeId);
+         if(opt.isPresent()) {
+        	      Employee emp= opt.get();
+        	     eRepo.delete(emp);;
+        	     return emp;
+         } else {
+        	 throw new EmployeeException("Employee does not found with roll:"+employeeId);
+         }
+	}
+
+	@Override
+	public List<Employee> getEmployeeDetailsByAddress(Address address) throws EmployeeException {
+		  List<Employee> listemp= eRepo.findByAddress(address.getCity());
+          
+          if(listemp.size()==0) {
+         	 throw new EmployeeException("Student does not found");
+          } else {
+         	 return listemp;
+          }
+	}
+
+	@Override
+	public Employee updateEmployee(Employee employee) throws EmployeeException {
+		  Optional<Employee> opt= eRepo.findById(employee.getEmployeeId());
+          if(opt.isPresent()) {
+       	      Employee updateEmp= eRepo.save(employee);
+       	      return updateEmp;
+          } else {
+       	   throw new EmployeeException("Invalid Employee Details");
+          }
+	}
+
+	@Override
+	public Employee updateEmployeeAddress(Integer employeeId, Address address) throws EmployeeException {
+		  Employee existingEmp= eRepo.findById(employeeId).orElseThrow(()-> new EmployeeException("Employee does not exits with roll:"+employeeId));
+	        existingEmp.setAddress(address);
+	       return eRepo.save(existingEmp);
+	}
+
+	@Override
+	public List<Employee> getEmployeesBetweenAge(Integer start_age, Integer end_age) throws EmployeeException {
+		              List<Employee> list= eRepo.getEmployeesBetweenAge(start_age, end_age);
+		              if(list.size()==0) {
+		            	  throw new EmployeeException("No Employee found");
+		              } else {
+		            	  return list;
+		              }
+	}
+
+	@Override
+	public List<EmployeeDto> getNameAddressAgeOfAllEmployees() throws EmployeeException {
+		 List<EmployeeDto> list= eRepo.getNameAddressAgeOfAllEmployees();
+         if(list.size()==0) {
+       	  throw new EmployeeException("No Employee found");
+         } else {
+       	  return list;
+         }    
+	}
+
+}

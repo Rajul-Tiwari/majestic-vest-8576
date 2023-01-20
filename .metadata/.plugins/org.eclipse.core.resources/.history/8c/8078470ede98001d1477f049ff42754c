@@ -1,0 +1,21 @@
+package com.masai.repository;
+
+import java.util.List;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+
+import com.masai.model.Employee;
+import com.masai.model.EmployeeDto;
+
+
+public interface EmployeeRepo extends JpaRepository<Employee, Integer>{
+	  @Query("select e from Employee e where e.address.city=?1")
+      public List<Employee> findByAddress(String address);
+	  @Query("select e from Employee e where e.age>?1 and e.age<?2")
+	  public List<Employee> getEmployeesBetweenAge(Integer start_age, Integer end_age);
+	  @Query("select e from Employee e where e.email=?1 and e.password=?2")
+	  public Employee loginStudent(String email,String password);
+	  @Query("select new com.masai.model.EmployeeDto(e.name,e.address,e.age) from Employee e")
+	  public List<EmployeeDto> getNameAddressAgeOfAllEmployees();
+}

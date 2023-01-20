@@ -1,0 +1,71 @@
+package com.masai.services;
+
+import java.time.LocalDateTime;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.masai.exception.ActivityException;
+import com.masai.exception.AdminException;
+import com.masai.model.Activity;
+import com.masai.model.Admin;
+import com.masai.repository.AdminDao;
+
+@Service
+public class AdminServiceImpl implements AdminService{
+	
+	@Autowired
+	AdminDao aDao;
+
+//	@Override
+//	public Admin regAdmin(Admin ad) throws AdminException {
+//		// TODO Auto-generated method stub
+//		
+//		
+//		
+//	}
+
+	@Override
+	public Admin insertAdmin(Admin ad) {
+		return aDao.save(ad);
+	}
+
+	@Override
+	public Admin updateAdmin(Admin admin) throws AdminException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Admin deleteAdmin(Integer adminId) throws AdminException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Activity> getAllActivities(Integer cutomerId) throws ActivityException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Activity> getAllActivities() throws ActivityException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Activity> getActivitiesDatewise(LocalDateTime date) throws ActivityException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Activity> getActivitiesForDays(Integer customerId, LocalDateTime fromdate, LocalDateTime toDate)
+			throws ActivityException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}

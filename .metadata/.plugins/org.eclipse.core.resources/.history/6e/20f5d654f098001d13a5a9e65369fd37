@@ -1,0 +1,24 @@
+package com.masai.services;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.masai.exception.AdminException;
+import com.masai.model.Admin;
+import com.masai.repository.AdminDao;
+
+@Service
+public class AdminServiceImpl implements AdminService{
+	
+	@Autowired
+	AdminDao aDao;
+
+	@Override
+	public Admin regAdmin(Admin ad) throws AdminException {
+		// TODO Auto-generated method stub
+		
+		
+		return aDao.save(ad);
+	}
+
+}
