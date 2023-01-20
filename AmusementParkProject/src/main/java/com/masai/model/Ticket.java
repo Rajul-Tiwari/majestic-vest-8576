@@ -26,8 +26,6 @@ public class Ticket {
     private Activity activity;
     
     
-    private Integer activityid;
-    
     private Float amount;
     
     private LocalDateTime dateTime;

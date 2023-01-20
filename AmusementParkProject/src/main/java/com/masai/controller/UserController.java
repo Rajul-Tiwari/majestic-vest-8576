@@ -9,8 +9,11 @@ import org.springframework.web.bind.annotation.*;
 import com.masai.exception.ActivityException;
 import com.masai.exception.CustomerException;
 import com.masai.exception.TicketException;
+import com.masai.model.Activity;
 import com.masai.model.Customer;
 import com.masai.model.Ticket;
+import com.masai.repository.ActivityDao;
+import com.masai.services.ActivityService;
 import com.masai.services.TicketService;
 import com.masai.services.UserService;
 
@@ -30,6 +33,10 @@ public class UserController {
 	
 	@Autowired
 	private TicketService tService;
+	
+	
+	@Autowired
+	private ActivityService aService;
 	
 	
     static boolean isLogin = false;
@@ -75,14 +82,25 @@ public class UserController {
 	}
     
     
-    @PostMapping("/ticketBooking")
-	public ResponseEntity<Ticket> bookticket(@RequestBody Ticket tkt) throws TicketException, ActivityException {
+    
+    @PostMapping("/ticketBooking/{activity_id}/{cid}")
+	public ResponseEntity<Ticket> bookticket(@RequestBody Ticket tkt,@PathVariable Integer activity_id,@PathVariable Integer cid) throws TicketException, ActivityException {
 
-		Ticket t = tService.ticketBooking(tkt);
+		Ticket t = tService.ticketBooking(tkt, activity_id, cid);
 
 		return new ResponseEntity<Ticket>(t, HttpStatus.CREATED);
 
 	}
+    
+    @GetMapping("/getAllActivity")
+    public ResponseEntity<List<Activity>> getAllactivity() throws ActivityException{
+    	
+    	List<Activity>actvityList=  cService.getAllActivity();
+    	
+    	return new ResponseEntity<List<Activity>>(actvityList,HttpStatus.OK);
+    	
+    	
+    }
     
     
 }

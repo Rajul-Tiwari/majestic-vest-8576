@@ -28,12 +28,12 @@ public class TicketServiceImpl implements TicketService {
   CustomerDao cDao;
 	
 	@Override
-	public Ticket ticketBooking(Ticket ticket) throws ActivityException, TicketException {
+	public Ticket ticketBooking(Ticket ticket,Integer activity_id,Integer cid) throws ActivityException, TicketException {
 		// TODO Auto-generated method stub
 		
-		 Optional<Activity> pack = aDao.findById(ticket.getActivityid());
+ Optional<Activity> pack = aDao.findById(activity_id);
 		 
-		 Optional<Customer> c= cDao.findById(1);
+		 Optional<Customer> c= cDao.findById(cid);
 		 Customer ctr= c.get();
 		 
 		
@@ -43,6 +43,7 @@ public class TicketServiceImpl implements TicketService {
 			   if(ticket.getAmount().equals(pack.get().getCharge())) {
 				 
 				   ticket.setCustomer(ctr);
+				   ticket.setActivity(pack.get());
 				   
 				   Ticket tkt= tDao.save(ticket);
 				 

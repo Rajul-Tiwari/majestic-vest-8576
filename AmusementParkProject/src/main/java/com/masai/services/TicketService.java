@@ -8,7 +8,7 @@ import com.masai.model.Ticket;
 
 public interface TicketService {
 	
-	public Ticket ticketBooking(Ticket ticket) throws ActivityException, TicketException ;
+	public Ticket ticketBooking(Ticket ticket,Integer activity_id,Integer cid) throws ActivityException, TicketException ;
 	
 	public Ticket updateTicketBooking(Ticket ticketBooking) throws TicketException;
 	
