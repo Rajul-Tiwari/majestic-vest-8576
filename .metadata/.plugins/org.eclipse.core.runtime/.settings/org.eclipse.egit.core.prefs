@@ -1,4 +1,9 @@
+<<<<<<< HEAD
 GitRepositoriesView.GitDirectories=C\:\\Users\\LENOVO\\Desktop\\New folder\\majestic-vest-8576\\.git;
 GitRepositoriesView.GitDirectories.relative=C\:\\Users\\LENOVO\\Desktop\\New folder\\majestic-vest-8576\\.git;
+=======
+GitRepositoriesView.GitDirectories=D\:\\My Project\\majestic-vest-8576\\.git;
+GitRepositoriesView.GitDirectories.relative=.git;
+>>>>>>> daff75cd670a31b1c9cee5678727b9c7f3c04ed7
 core_autoIgnoreDerivedResources=false
 eclipse.preferences.version=1

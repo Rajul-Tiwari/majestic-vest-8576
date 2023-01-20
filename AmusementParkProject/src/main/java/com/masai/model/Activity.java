@@ -7,6 +7,8 @@ import lombok.Setter;
 
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Getter
 @Setter
 @NoArgsConstructor
@@ -18,6 +20,8 @@ public class Activity {
     private Integer activityId;
     private String Description;
     private Float charge;
-    @OneToOne(cascade = CascadeType.ALL)
-    private Ticket ticket;
+    
+//    @JsonIgnore
+//    @OneToOne
+//    private Ticket ticket;
 }

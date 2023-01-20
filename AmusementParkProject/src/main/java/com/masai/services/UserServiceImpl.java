@@ -3,9 +3,12 @@ package com.masai.services;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.masai.exception.ActivityException;
 import com.masai.exception.CustomerException;
+import com.masai.model.Activity;
 import com.masai.model.CurrentUserSession;
 import com.masai.model.Customer;
+import com.masai.repository.ActivityDao;
 import com.masai.repository.CustomerDao;
 import com.masai.repository.SessionDao;
 
@@ -19,7 +22,9 @@ public class UserServiceImpl implements UserService{
 	@Autowired
 	private CustomerDao cDao;
 
-
+	 
+	@Autowired
+	private ActivityDao aDao;
 	
 	@Autowired
 	private SessionDao sDao;
@@ -81,6 +86,29 @@ public class UserServiceImpl implements UserService{
 			return customer;
 		}
 
+	}
+
+
+	@Override
+	public List<Activity> getAllActivity() throws ActivityException {
+		// TODO Auto-generated method stub
+		
+		List<Activity> act= aDao.findAll();
+		
+		if(act.isEmpty()) {
+			
+			throw new ActivityException("No activity In database");
+		}else {
+			
+			
+		}
+		
+		return act;
+	}
+
+	@Override
+	public Customer viewCustomer(Integer customerId) throws CustomerException {
+		return cDao.findById(customerId).orElseThrow(()->new CustomerException("not found with this id"));
 	}
 
 

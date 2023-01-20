@@ -6,8 +6,15 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import com.masai.exception.ActivityException;
 import com.masai.exception.CustomerException;
+import com.masai.exception.TicketException;
+import com.masai.model.Activity;
 import com.masai.model.Customer;
+import com.masai.model.Ticket;
+import com.masai.repository.ActivityDao;
+import com.masai.services.ActivityService;
+import com.masai.services.TicketService;
 import com.masai.services.UserService;
 
 import java.util.List;
@@ -23,6 +30,9 @@ public class UserController {
 
 	@Autowired
 	private UserService cService;
+	
+	@Autowired
+	private ActivityService aService;
 	
 	
     static boolean isLogin = false;
@@ -53,9 +63,11 @@ public class UserController {
 
 	@DeleteMapping("/{customerId}")
 	public ResponseEntity<String>deleteCustomer(@PathVariable ("customerId") Integer customerId)throws CustomerException{
+		
 		return new ResponseEntity(cService.deleteCustomer(customerId),HttpStatus.OK);
 	}
-@GetMapping("/allCustomer")
+	
+    @GetMapping("/allCustomer")
 	public ResponseEntity<Object>getAllCustomer()throws CustomerException{
 		if (isLogin){
 			List<Customer> customerList=cService.getAllCustomer();
@@ -63,5 +75,22 @@ public class UserController {
 		}else{
 			return new ResponseEntity<>("Please, Login first!",HttpStatus.OK);
 		}
+	}
+    
+    
+    
+    @GetMapping("/getAllActivity")
+    public ResponseEntity<List<Activity>> getAllactivity() throws ActivityException{
+    	
+    	List<Activity>actvityList=  cService.getAllActivity();
+    	
+    	return new ResponseEntity<List<Activity>>(actvityList,HttpStatus.OK);
+    	
+    	
+    }
+
+	@GetMapping("/{customerId}")
+	public ResponseEntity<Object>viewCustomerById(@PathVariable ("customerId") Integer customerId)throws CustomerException{
+		return new ResponseEntity<>(cService.viewCustomer(customerId),HttpStatus.OK);
 	}
 }
