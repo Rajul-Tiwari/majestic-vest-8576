@@ -106,5 +106,10 @@ public class UserServiceImpl implements UserService{
 		return act;
 	}
 
+	@Override
+	public Customer viewCustomer(Integer customerId) throws CustomerException {
+		return cDao.findById(customerId).orElseThrow(()->new CustomerException("not found with this id"));
+	}
+
 
 }

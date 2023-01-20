@@ -20,8 +20,8 @@ public interface UserService {
 	public List<Customer> getAllCustomer() throws CustomerException;
 	
 	public List<Activity> getAllActivity() throws ActivityException;
-	
-	
+
+	public Customer viewCustomer(Integer customerId)throws CustomerException;
 	
 	
 	

@@ -88,6 +88,9 @@ public class UserController {
     	
     	
     }
-    
-    
+
+	@GetMapping("/{customerId}")
+	public ResponseEntity<Object>viewCustomerById(@PathVariable ("customerId") Integer customerId)throws CustomerException{
+		return new ResponseEntity<>(cService.viewCustomer(customerId),HttpStatus.OK);
+	}
 }
