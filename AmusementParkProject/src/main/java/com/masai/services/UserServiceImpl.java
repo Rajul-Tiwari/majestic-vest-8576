@@ -10,7 +10,9 @@ import com.masai.repository.CustomerDao;
 import com.masai.repository.SessionDao;
 
 import javax.swing.*;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 
 @Service
@@ -81,6 +83,18 @@ public class UserServiceImpl implements UserService{
 			return customer;
 		}
 
+	}
+
+	@Override
+	public Customer viewCustomer(Integer customerId) throws CustomerException {
+//		List<Customer> customer = new ArrayList<>();
+//		customer.add(customer.get());
+//
+//		if(customer) {
+//			throw new UserException("User not found by given id "+userID);
+//		}else
+//			return user.get(0);
+			return cDao.findById(customerId).orElseThrow(()->new CustomerException("not found with this id"));
 	}
 
 

@@ -64,4 +64,8 @@ public class UserController {
 			return new ResponseEntity<>("Please, Login first!",HttpStatus.OK);
 		}
 	}
+	@GetMapping("/{customerId}")
+	public ResponseEntity<Object>viewCustomerById(@PathVariable ("customerId") Integer customerId)throws CustomerException{
+		return new ResponseEntity<>(cService.viewCustomer(customerId),HttpStatus.OK);
+	}
 }

@@ -16,6 +16,8 @@ public interface UserService {
 	public String deleteCustomer(Integer customerId)throws CustomerException;
 
 	public List<Customer> getAllCustomer() throws CustomerException;
+
+	public Customer viewCustomer(Integer customerId)throws CustomerException;
 	
 	
 	
