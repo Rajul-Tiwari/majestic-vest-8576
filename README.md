@@ -5,6 +5,11 @@
 
 
 
+
+
+
+
+
 <h3>Admin module :</h3>
 <li>Admin can manage the activity ,add activity,Delete activity and See all customer and their Tickets and activity</li>
 <li align="justify">This module provides administrator related functionality. Administrator manages all information and has access rights to add, delete, edit and view the data related to admin, ticket, activity, tiketbookings, etc.</li>
