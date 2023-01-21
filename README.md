@@ -82,7 +82,8 @@
 <hr>
 
 <h3 align="center">MySQL Schema Database Structure</h3>
-<p align="center"><img src="https://user-images.githubusercontent.com/103574856/208439456-7afc0143-ac45-48d9-84aa-cb49db09d717.png"/></p>
+<p align="center"><img src="https://user-images.githubusercontent.com/105913917/213882065-dd21a036-c1d9-494f-9c32-244912bbc87d.png"
+/></p>
 
 <h3 id="modules">Modules</h3>
     <ul>
@@ -134,27 +135,27 @@
 <tr valign="top">
 
 <td width="25%" align="center">
-<p dir="auto"><span>Admin Developer</span><br><br></p>
+<p dir="auto"><span>Cutomer Module Developer</span><br><br></p>
 <a><img src="https://user-images.githubusercontent.com/105913917/213881683-27611aa3-469d-42b1-8c7b-d011d3ca0ff5.PNG"
  height="100"></a>
 <p dir="auto"><span>Rajul Tiwari</span><br></p>
 </td>
 
 <td width="25%" align="center">
-<p dir="auto"><span>Admin Developer</span><br><br></p>
+<p dir="auto"><span>Admin Module Developer</span><br><br></p>
 <a><img src="https://user-images.githubusercontent.com/105913917/213882007-284fb978-f107-47ae-ad59-eb098291e924.PNG"
 height="100"></a>
 <p dir="auto"><span>Abhinandan Rauniyar</span><br></p>
 </td>
 
 <td width="25%" align="center">
-<p dir="auto"><span>User Developer</span><br><br></p>
+<p dir="auto"><span>Activity Module Developer</span><br><br></p>
 <a><img src="https://avatars.githubusercontent.com/u/105913917?v=4" height="100"></a>
 <p dir="auto"><span>Vedprakash Paswan</span><br></p>
 </td>
 
 <td width="25%" align="center">
-<p dir="auto"><span>User Developer</span><br><br></p>
+<p dir="auto"><span>Ticket Module Developer</span><br><br></p>
 <a><img src="https://user-images.githubusercontent.com/105913917/213881240-fafb16a4-9a09-4015-81c2-a58b1164058e.png"
  height="100"></a>
 <p dir="auto"><span>Shivam Shahu</span><br></p>
