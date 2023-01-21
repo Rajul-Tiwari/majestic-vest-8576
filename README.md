@@ -1,13 +1,10 @@
 
 <h2>Project Summary 📚 :</h2>
 <img align="left" width="153" src="https://user-images.githubusercontent.com/105913917/213880222-bf403731-aee1-460a-afea-381abea7bcf6.jpg"/>
-<p align="justify">In this project a detailed review of Amusement Park application. The main objectives of this project to know the package related to the Amusement Park and Activity with best facility and current offer. Searching will be very easy .At a single click will be able to fetch the required data.</p>
+<p align="justify">In this project a detailed review of Amusement Park application. The main objectives of this project to know the package related to the Amusement Park and Activity with best facility and current offer. Searching will be very easy .At a single click will be able to fetch the required data.</p><br /><br /><br /><br /><br /><br /><br />
 
 
-<p></p>
-<p></p><p></p>
-<p></p>
-<p></p>
+
 
 
 
