@@ -153,7 +153,7 @@
 
 <td width="25%" align="center">
 <p dir="auto"><span>User Developer</span><br><br></p>
-<a><img src=![107460400](https://user-images.githubusercontent.com/105913917/213881240-fafb16a4-9a09-4015-81c2-a58b1164058e.png)
+<a><img src="https://user-images.githubusercontent.com/105913917/213881240-fafb16a4-9a09-4015-81c2-a58b1164058e.png"
  height="100"></a>
 <p dir="auto"><span>Jainendra Singh</span><br></p>
 </td>
