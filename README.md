@@ -1,4 +1,4 @@
-<h2 align="center">✩░▒▓▆▅▃▂▁📚𝐕𝐞𝐧𝐭𝐮𝐫𝐞 𝐓𝐫𝐢𝐩📚▁▂▃▅▆▓▒░✩</h2>
+
 <h2>Project Summary 📚 :</h2>
 <img align="left" width="153" src="https://user-images.githubusercontent.com/105913917/213880222-bf403731-aee1-460a-afea-381abea7bcf6.jpg"/>
 <p align="justify">In this project a detailed review of Amusement Park application. The main objectives of this project to know the package related to the Amusement Park and Activity with best facility and current offer. Searching will be very easy .At a single click will be able to fetch the required data.</p>
@@ -9,8 +9,7 @@
 
 
 
-
-<h3>Admin module :</h3>
+<h3 margin-top:100px>Admin module :</h3>
 <li>Admin can manage the activity ,add activity,Delete activity and See all customer and their Tickets and activity</li>
 <li align="justify">This module provides administrator related functionality. Administrator manages all information and has access rights to add, delete, edit and view the data related to admin, ticket, activity, tiketbookings, etc.</li>
 <h3>User module :</h3>
@@ -90,30 +89,25 @@
         <li>Login, Logout Module</li>
         <li>User Module</li>
         <li>Admin Module</li>
-        <li>Booking Management Module</li>
-        <li>Feedback Module</li>
-        <li>Report Module</li>
-        <li>Trip Package Management Module</li>
-        <li>Route Mangement Module</li>
+        <li>Activity Module</li>
+        <li>Ticket Module</li>
     </ul>
     <h3 id="features">Features</h3>
     <ul>
         <li>User and Admin authentication &amp; validation with session uuid having.</li>
         <li>Admin Features:<ul>
                 <li>Administrator Role of the entire application</li>
-                <li>Only registered admins with valid session token can add/update/delete Package,Hotel,Route or
-                    customer from main database.</li>
-                <li>Admin can access the details of different Routes, Bus, Packages,
-                    TicketDetails,Feedback,Customer,Reports,etc.</li>
+                <li>Only registered admins with valid session token can add/update/delete Activity or
+                  customer from main database.</li>
             </ul>
         </li>
         <li>User Features:<ul>
                 <li>A user can register himself or herself on the platform.</li>
-                <li>He/She can check the Packages and Hotels availabilty.</li>
-                <li>If Trip Package is available, can book the trip package by providing payment details.</li>
-                <li>After booking, he will get booking details for the whole Package inside this there will be all
+                <li>He/She can check the Activity availabilty.</li>
+                <li>If Activity is  available, can book the Ticket for thet activity by providing payment details.</li>
+                <li>After booking, he will get booking details for the activity,inside this there will be all
                     details regarding the ticket details ,total cost, etc.</li>
-                <li>If the customer want can cancel the booking.</li>
+                <li>If the customer want can cancel the booking ,he is able to delete his ticket.</li>
             </ul>
         </li>
     </ul>
