@@ -12,52 +12,65 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.masai.exception.CustomerException;
-import com.masai.model.Customer;
 import com.masai.model.LoginDTO;
 import com.masai.services.LoginService;
 import com.masai.services.UserService;
-
-
-
-
 
 @RestController
 @RequestMapping("/login")
 public class LoginController {
 
-  
-	 @Autowired
-	    private UserService cService;
-   
-    
-    @Autowired
-	private LoginService customerLogin;
-    
+	@Autowired
+	private UserService cService;
 
+	@Autowired
+	private LoginService userLogin;
 
-    
 	@PostMapping("/customerlogin")
 	public ResponseEntity<String> logInCustomer(@RequestBody LoginDTO dto) throws LoginException {
-	
-			String result = customerLogin.logIntoAccount(dto);
-			if(result != null) {
-	    		UserController.isLogin = true;
-	    	}
 
-			return new ResponseEntity<String>(result,HttpStatus.OK );	
-	
+		String result = userLogin.logIntoAccount(dto);
+		if (result != null) {
+			UserController.isLogin = true;
+		}
+
+		return new ResponseEntity<String>(result, HttpStatus.OK);
+
 	}
-	
+
 	@PatchMapping("/customerlogout")
 	public String logoutCustomer(@RequestParam(required = false) String key) throws LoginException {
-		String result = customerLogin.logOutFromAccount(key);
-		if(result != null) {
-    		UserController.isLogin = false;
-    	}
+		String result = userLogin.logOutFromAccount(key);
+		if (result != null) {
+			UserController.isLogin = false;
+		}
 		return result;
-		
+
 	}
 	
+	@PostMapping("/adminLogin")
+	public ResponseEntity<String> logInAdmin(@RequestBody LoginDTO dto) throws LoginException {
+
+		String result = userLogin.logIntoAccount(dto);
+		if (result != null) {
+			AdminController.isLogin = true;
+		}
+
+		return new ResponseEntity<String>(result, HttpStatus.OK);
+
+	}
+
+	@PatchMapping("/adminLogout")
+	public String logoutAdmin(@RequestParam(required = false) String key) throws LoginException {
+		
+		String result = userLogin.logOutFromAccount(key);
+		
+		if (result != null) {
+			AdminController.isLogin = false;
+		}
+		
+		return result;
+
+	}
 
 }

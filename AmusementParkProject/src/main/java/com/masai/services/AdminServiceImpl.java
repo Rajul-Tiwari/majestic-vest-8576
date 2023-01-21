@@ -8,8 +8,10 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.masai.controller.AdminController;
 import com.masai.exception.ActivityException;
 import com.masai.exception.AdminException;
+import com.masai.exception.LoginException;
 import com.masai.model.Activity;
 import com.masai.model.Admin;
 import com.masai.model.Customer;
@@ -20,23 +22,16 @@ import com.masai.repository.CustomerDao;
 import com.masai.repository.TicketDao;
 
 @Service
-public class AdminServiceImpl implements AdminService{
-	
+public class AdminServiceImpl implements AdminService {
+
 	@Autowired
 	AdminDao aDao;
-      @Autowired
-      CustomerDao cDao;
-      @Autowired
-      ActivityDao acDao;
-      @Autowired
-      TicketDao tDao;
-//	@Override
-//	public Admin regAdmin(Admin ad) throws AdminException {
-//		// TODO Auto-generated method stub
-//		
-//		
-//		
-//	}
+	@Autowired
+	CustomerDao cDao;
+	@Autowired
+	ActivityDao acDao;
+	@Autowired
+	TicketDao tDao;
 
 	@Override
 	public Admin insertAdmin(Admin ad) {
@@ -44,80 +39,92 @@ public class AdminServiceImpl implements AdminService{
 	}
 
 	@Override
-	public Admin updateAdmin(Admin admin) throws AdminException {
-		                Optional<Admin> opt= aDao.findById(admin.getAdminID());
-		                
-		                if(opt.isPresent()) {
-		                	       Admin updateAdmin=   aDao.save(admin);
-		                	       return updateAdmin;
-		                } else {
-		                	throw new AdminException("Admin does not exits");
-		                }
+	public Admin updateAdmin(Admin admin) throws AdminException, LoginException {
+		
+		if(!AdminController.isLogin) {
+			throw new LoginException("Please login first");
+		}
+		
+		Optional<Admin> opt = aDao.findById(admin.getAdminID());
+
+		if (opt.isPresent()) {
+			Admin updateAdmin = aDao.save(admin);
+			return updateAdmin;
+		} else {
+			throw new AdminException("Admin does not exist");
+		}
 	}
 
 	@Override
 	public Admin deleteAdmin(Integer adminId) throws AdminException {
-		              Optional<Admin> opt= aDao.findById(adminId);
-		              
-		              if(opt.isPresent()) {
-		            	         aDao.delete(opt.get());
-		            	         return opt.get();
-		              } else {
-		            	  throw new AdminException("Admin does not found with adminId:"+adminId);
-		              }
+		Optional<Admin> opt = aDao.findById(adminId);
+
+		if (opt.isPresent()) {
+			aDao.delete(opt.get());
+			return opt.get();
+		} else {
+			throw new AdminException("Admin does not found with adminId:" + adminId);
+		}
 	}
 
 	@Override
 	public List<Activity> getAllActivities(Integer cutomerId) throws ActivityException {
 
-		             Optional<Customer> customer= cDao.findById(cutomerId);                 
-		                           Customer customer1=  customer.get();
-		                   List<Ticket> listTicket=  customer1.getTickets();     
-		              List<Activity> listActivity= new ArrayList<>();
-		          listTicket.forEach(t-> listActivity.add(t.getActivity()));
-		          if(listActivity.size()==0) {
-		        	  throw new ActivityException("No Activity found");
-		          } else {
-		        	  return listActivity;
-		          }
+		Optional<Customer> customer = cDao.findById(cutomerId);
+		Customer customer1 = customer.get();
+		List<Ticket> listTicket = customer1.getTickets();
+		List<Activity> listActivity = new ArrayList<>();
+		listTicket.forEach(t -> listActivity.add(t.getActivity()));
+		if (listActivity.size() == 0) {
+			throw new ActivityException("No Activity found");
+		} else {
+			return listActivity;
+		}
 	}
 
 	@Override
 	public List<Activity> getAllActivities() throws ActivityException {
-		                 List<Activity> listActivity=    acDao.findAll();
-		                 
-		                 if(listActivity.size()==0) {
-		                	 throw new ActivityException("No Activity found");
-		                 } else {
-		                	 return listActivity;
-		                 }
-		                 
-		                 
+		List<Activity> listActivity = acDao.findAll();
+
+		if (listActivity.size() == 0) {
+			throw new ActivityException("No Activity found");
+		} else {
+			return listActivity;
+		}
+
 	}
 
 	@Override
 	public List<Activity> getActivitiesDatewise(LocalDateTime date) throws ActivityException {
-//		System.out.println(date);
-//	              List<Ticket> listTicket= tDao.getTicketByDate(date);
-//	           List<Activity> listActivity= new ArrayList<>();   
-//		                    listTicket.forEach(t->listActivity.add(t.getActivity()));
-//		
-//		                  if(listActivity.size()==0) {
-//		                	  throw new ActivityException("No Activity found");
-//		                  } else {
-//		                	  return listActivity;
-//		                  }
-		                  
-		                 return null;
-		
-		
+		System.out.println(date);
+		List<Ticket> listTicket = tDao.getTicketByDate(date);
+		List<Activity> listActivity = new ArrayList<>();
+		listTicket.forEach(t -> listActivity.add(t.getActivity()));
+
+		if (listActivity.size() == 0) {
+			throw new ActivityException("No Activity found");
+		} else {
+			return listActivity;
+		}
+
 	}
 
 	@Override
 	public List<Activity> getActivitiesForDays(Integer customerId, LocalDateTime fromdate, LocalDateTime toDate)
 			throws ActivityException {
-		// TODO Auto-generated method stub
-		return null;
+
+		Optional<Customer> opt = cDao.findById(customerId);
+		Customer customer1 = opt.get();
+		List<Ticket> listTicket = customer1.getTickets();
+
+		List<Ticket> listTicket1 = tDao.getTicketBetweenDate(fromdate, toDate);
+		List<Activity> listActivity = new ArrayList<>();
+		listTicket1.forEach(t -> listActivity.add(t.getActivity()));
+		if (listActivity.size() == 0) {
+			throw new ActivityException("No Activity found");
+		} else {
+			return listActivity;
+		}
 	}
-	 
+
 }

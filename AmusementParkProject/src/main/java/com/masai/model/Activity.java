@@ -15,13 +15,13 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 @AllArgsConstructor
 @Entity
 public class Activity {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer activityId;
-    private String Description;
-    private Float charge;
-    
-//    @JsonIgnore
-//    @OneToOne
-//    private Ticket ticket;
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private Integer activityId;
+	
+	private String Description;
+	
+	private Float charge;
+
 }

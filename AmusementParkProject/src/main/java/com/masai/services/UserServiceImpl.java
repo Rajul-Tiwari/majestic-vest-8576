@@ -12,23 +12,20 @@ import com.masai.repository.ActivityDao;
 import com.masai.repository.CustomerDao;
 import com.masai.repository.SessionDao;
 
-import javax.swing.*;
 import java.util.List;
 
-
 @Service
-public class UserServiceImpl implements UserService{
-	
+public class UserServiceImpl implements UserService {
+
 	@Autowired
 	private CustomerDao cDao;
 
-	 
 	@Autowired
 	private ActivityDao aDao;
-	
+
 	@Autowired
 	private SessionDao sDao;
-	
+
 	@Override
 	public Customer regCustomer(Customer customer) throws CustomerException {
 		Customer exsistingcustomer = cDao.findByEmail(customer.getEmail());
@@ -40,32 +37,30 @@ public class UserServiceImpl implements UserService{
 		return cDao.save(customer);
 	}
 
-	
 	@Override
 	public Customer updateCustomer(Customer customer, String key) throws CustomerException {
-		
-		CurrentUserSession loggedInUser= sDao.findByUuid(key);
-		
-		if(loggedInUser == null) {
+
+		CurrentUserSession loggedInUser = sDao.findByUuid(key);
+
+		if (loggedInUser == null) {
 			throw new CustomerException("Please provide a valid key to update a customer");
 		}
-		
-		
-	
-		
-		if(customer.getCustomerID()== loggedInUser.getUserId()) {
-			//If LoggedInUser id is same as the id of supplied Customer which we want to update
+
+		if (customer.getCustomerID() == loggedInUser.getUserId()) {
+			// If LoggedInUser id is same as the id of supplied Customer which we want to
+			// update
 			return cDao.save(customer);
-		}
-		else
+		} else
 			throw new CustomerException("Invalid Customer Details, please login first");
 	}
 
 	@Override
 	public String deleteCustomer(Integer customerId) throws CustomerException {
-		CurrentUserSession userSession=sDao.findById(customerId).orElseThrow(()->new CustomerException("Customer not fount with this Id"));
-			Customer customer= cDao.findById(customerId).orElseThrow(()->new CustomerException("Cucstomer not found with thiss id"));
-		if(userSession!=null){
+		CurrentUserSession userSession = sDao.findById(customerId)
+				.orElseThrow(() -> new CustomerException("Customer not fount with this Id"));
+		Customer customer = cDao.findById(customerId)
+				.orElseThrow(() -> new CustomerException("Cucstomer not found with thiss id"));
+		if (userSession != null) {
 			sDao.delete(userSession);
 			cDao.delete(customer);
 
@@ -77,39 +72,35 @@ public class UserServiceImpl implements UserService{
 
 	@Override
 	public List<Customer> getAllCustomer() throws CustomerException {
-		List<Customer>customer=cDao.findAll();
+		List<Customer> customer = cDao.findAll();
 
-		if(customer.isEmpty()){
+		if (customer.isEmpty()) {
 			throw new CustomerException("Customer not exist");
-		}
-		else{
+		} else {
 			return customer;
 		}
 
 	}
 
-
 	@Override
 	public List<Activity> getAllActivity() throws ActivityException {
 		// TODO Auto-generated method stub
-		
-		List<Activity> act= aDao.findAll();
-		
-		if(act.isEmpty()) {
-			
+
+		List<Activity> act = aDao.findAll();
+
+		if (act.isEmpty()) {
+
 			throw new ActivityException("No activity In database");
-		}else {
-			
-			
+		} else {
+
 		}
-		
+
 		return act;
 	}
 
 	@Override
 	public Customer viewCustomer(Integer customerId) throws CustomerException {
-		return cDao.findById(customerId).orElseThrow(()->new CustomerException("not found with this id"));
+		return cDao.findById(customerId).orElseThrow(() -> new CustomerException("not found with this id"));
 	}
-
 
 }

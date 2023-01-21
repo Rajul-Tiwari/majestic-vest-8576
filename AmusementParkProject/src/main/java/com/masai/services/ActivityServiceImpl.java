@@ -6,103 +6,115 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.masai.controller.AdminController;
 import com.masai.exception.ActivityException;
+import com.masai.exception.LoginException;
 import com.masai.model.Activity;
 import com.masai.repository.ActivityDao;
 
-
 @Service
 public class ActivityServiceImpl implements ActivityService {
-	
+
 	@Autowired
 	ActivityDao aDao;
 
 	@Override
-	public Activity insertActivity(Activity activity) throws ActivityException {
+	public Activity insertActivity(Activity activity) throws ActivityException, LoginException {
 		
-		Activity a= aDao.save(activity);
+		if(!AdminController.isLogin) {
+			throw new LoginException("Please login first");
+		}
 		
+		Activity a = aDao.save(activity);
+
 		return a;
 	}
 
 	@Override
-	public Activity updateActivity(Activity activity) throws ActivityException {
-		// TODO Auto-generated method stub
+	public Activity updateActivity(Activity activity) throws ActivityException, LoginException {
 		
-		Optional<Activity> a= aDao.findById(activity.getActivityId());
-		
-		if(a.isPresent()) {
-			
-		Activity act=	a.get();
-		act.setDescription(activity.getDescription());
-		act.setCharge(activity.getCharge());
-		
-		Activity updated =aDao.save(act);
-		
-		
-		return updated;
-			
-		}else {
-			
-			throw new ActivityException("No activity with this id");
-			
+		if(!AdminController.isLogin) {
+			throw new LoginException("Please login first");
 		}
-		
-		
+
+		Optional<Activity> a = aDao.findById(activity.getActivityId());
+
+		if (a.isPresent()) {
+
+			Activity act = a.get();
+			act.setDescription(activity.getDescription());
+			act.setCharge(activity.getCharge());
+
+			Activity updated = aDao.save(act);
+
+			return updated;
+
+		} else {
+
+			throw new ActivityException("No activity with this id");
+
+		}
+
 	}
 
 	@Override
-	public Activity deleteActivity(int activityid) throws ActivityException {
-		// TODO Auto-generated method stub
-		Optional<Activity> a= aDao.findById(activityid);
+	public Activity deleteActivity(int activityid) throws ActivityException, LoginException {
 		
-		if(a.isPresent()) {
-			Activity act= a.get();
-			
+		if(!AdminController.isLogin) {
+			throw new LoginException("Please login first");
+		}
+		
+		Optional<Activity> a = aDao.findById(activityid);
+
+		if (a.isPresent()) {
+			Activity act = a.get();
+
 			aDao.delete(act);
-			
+
 			return act;
-		}else {
-			
+		} else {
+
 			throw new ActivityException("No activity with this id");
 		}
-		
-		
+
 	}
 
 	@Override
-	public List<Activity> viewActivityofCharges(float charges) throws ActivityException {
-		// TODO Auto-generated method stub
+	public List<Activity> viewActivityofCharges(float charges) throws ActivityException, LoginException {
 		
+		if(!AdminController.isLogin) {
+			throw new LoginException("Please login first");
+		}
+
 		List<Activity> act = aDao.findByCharge(charges);
-		
-		if(act.isEmpty()) {
-			
+
+		if (act.isEmpty()) {
+
 			throw new ActivityException("No activity List Database");
-		}else {
-			
+		} else {
+
 			return act;
 		}
-		
-		
-		
+
 	}
 
 	@Override
-	public int countActivityofCharges(float charges) throws ActivityException {
-		// TODO Auto-generated method stub
+	public int countActivityofCharges(float charges) throws ActivityException, LoginException {
 		
+		if(!AdminController.isLogin) {
+			throw new LoginException("Please login first");
+		}
+
 		List<Activity> act = aDao.findByCharge(charges);
-		
-     if(act.isEmpty()) {
-			
+
+		if (act.isEmpty()) {
+
 			throw new ActivityException("No activity List Database");
-		}else {
-			
+		} else {
+
 			return act.size();
 		}
-		
-	
+
 	}
 
 }
