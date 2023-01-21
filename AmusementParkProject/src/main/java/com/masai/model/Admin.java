@@ -19,38 +19,25 @@ import lombok.Setter;
 @Setter
 @Entity
 public class Admin {
-	
-	
+
 	@Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer adminID;
-	
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Integer adminID;
+
 	@NotNull
-	@Size(min=4,max=12,message = "Password should has minimum 4 to 12 characters")
-    private String user_Name;
+	@Size(min = 4, max = 12, message = "Password should has minimum 4 to 12 characters")
+	private String user_Name;
 
-
-	@Size(min=4,max=12,message = "Password should has minimum 4 to 12 characters")
+	@Size(min = 4, max = 12, message = "Password should has minimum 4 to 12 characters")
 	private String password;
 
 	@NotNull
-    private String address;
+	private String address;
 
-    @Size(min=10, message ="Mobile Number should be of 10 digits!")
+	@Size(min = 10, message = "Mobile Number should be of 10 digits!")
 	private String mobileNumber;
 
 	@Email
-    private String email;
-	
-	
-	
-	
-	
-	
-	
-	
-
-    
-    
+	private String email;
 
 }

@@ -10,26 +10,25 @@ import javax.persistence.*;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import java.time.LocalDateTime;
+
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
 public class Ticket {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer TicketId;
-    
 
-    @JsonIgnore
-    @OneToOne( cascade = CascadeType.ALL)
-    private Activity activity;
-    
-    
-    private Float amount;
-    
-    private LocalDateTime dateTime;
-    @JsonIgnore
-    @ManyToOne
-    private Customer customer;
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private Integer TicketId;
+
+	@JsonIgnore
+	@OneToOne
+	private Activity activity;
+
+	private LocalDateTime dateTime;
+
+	@JsonIgnore
+	@ManyToOne
+	private Customer customer;
 }

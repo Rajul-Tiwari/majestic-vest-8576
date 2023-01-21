@@ -13,96 +13,63 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.masai.exception.ActivityException;
+import com.masai.exception.LoginException;
 import com.masai.model.Activity;
 import com.masai.services.ActivityService;
 import com.masai.services.UserService;
 
 @RestController
 public class ActivityController {
-	
-@Autowired
-ActivityService aService;
 
+	@Autowired
+	ActivityService aService;
 
-@Autowired
-private UserService cService;
+	@Autowired
+	private UserService cService;
 
+	@PostMapping("/insertActivity")
+	public ResponseEntity<Activity> createCustomer(@RequestBody Activity act) throws ActivityException, LoginException {
 
-@PostMapping("/insertActivity")
-public ResponseEntity<Activity> createCustomer(@RequestBody Activity act) throws  ActivityException {
+		Activity a = aService.insertActivity(act);
 
-	Activity a = aService.insertActivity(act);
+		return new ResponseEntity<Activity>(a, HttpStatus.CREATED);
 
-	return new ResponseEntity<Activity>(a, HttpStatus.CREATED);
+	}
 
-}
+	@PutMapping("/updateActivity")
+	public ResponseEntity<Activity> updateActivity(@RequestBody Activity activity) throws ActivityException, LoginException {
 
+		Activity a = aService.updateActivity(activity);
 
+		return new ResponseEntity<Activity>(a, HttpStatus.OK);
 
-@GetMapping("/getAllActivity")
-public ResponseEntity<List<Activity>> getAllactivity() throws ActivityException{
-	
-	List<Activity>actvityList=  cService.getAllActivity();
-	
-	return new ResponseEntity<List<Activity>>(actvityList,HttpStatus.OK);
-	
-	
-}
+	}
 
+	@DeleteMapping("/deleteActivity")
+	public ResponseEntity<Activity> deleteActivity(int activityid) throws ActivityException, LoginException {
 
+		Activity a = aService.deleteActivity(activityid);
 
-@PutMapping("/updateActivity")
-public ResponseEntity<Activity> updateActivity(@RequestBody  Activity activity) throws ActivityException{
-	
-	Activity a= aService.updateActivity(activity);
-	
-	return new ResponseEntity<Activity>(a, HttpStatus.OK);
-	
-	
-}
+		return new ResponseEntity<Activity>(a, HttpStatus.OK);
 
+	}
 
+	@GetMapping("/viewActivityofCharges")
+	public ResponseEntity<List<Activity>> viewActivityofCharges(float charges) throws ActivityException, LoginException {
 
-@DeleteMapping("/deleteActivity")
-public ResponseEntity<Activity> deleteActivity(int activityid) throws ActivityException{
-	
-	Activity a= aService.deleteActivity(activityid);
-	
-	return new ResponseEntity<Activity>(a, HttpStatus.OK);
-	
-	
-}
+		List<Activity> aList = aService.viewActivityofCharges(charges);
 
+		return new ResponseEntity<List<Activity>>(aList, HttpStatus.OK);
 
-@GetMapping("/viewActivityofCharges")
-public ResponseEntity<List<Activity>>viewActivityofCharges(float charges) throws ActivityException{
-	
-	List<Activity> aList= aService.viewActivityofCharges(charges);
-	
-	return new ResponseEntity<List<Activity>>(aList, HttpStatus.OK);
-	
-	
-}
+	}
 
+	@GetMapping("/countctivityOfCharges")
+	public ResponseEntity<Integer> countActivityofCharges(float charges) throws ActivityException, LoginException {
 
- 
+		int aCount = aService.countActivityofCharges(charges);
 
-   @GetMapping("/countctivityOfCharges")
-   public ResponseEntity<Integer>  countActivityofCharges(float charges) throws ActivityException{
-   	
-   	int aCount= aService.countActivityofCharges(charges);
-   	
-   	return new ResponseEntity<Integer>(aCount, HttpStatus.OK);
-   	
-   	
-   }
+		return new ResponseEntity<Integer>(aCount, HttpStatus.OK);
 
-
-
-
-
-
-
-	
+	}
 
 }

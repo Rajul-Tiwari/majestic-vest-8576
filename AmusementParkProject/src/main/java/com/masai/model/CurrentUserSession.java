@@ -8,7 +8,6 @@ import javax.persistence.Id;
 
 import lombok.*;
 
-
 @Entity
 @Getter
 @Setter
@@ -16,20 +15,13 @@ import lombok.*;
 @AllArgsConstructor
 @ToString
 public class CurrentUserSession {
-	
 
 	@Id
 	@Column(unique = true)
 	private Integer userId;
-	
-	
+
 	private String uuid;
-	
+
 	private LocalDateTime localDateTime;
 
-	
-
-	
-	
-	
 }
