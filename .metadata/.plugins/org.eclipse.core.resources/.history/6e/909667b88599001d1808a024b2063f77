@@ -1,0 +1,18 @@
+package com.masai.repository;
+
+import java.time.LocalDateTime;
+import java.util.List;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+
+import com.masai.model.Ticket;
+
+public interface TicketDao  extends JpaRepository<Ticket, Integer>{
+	@Query("select t from Ticket t where t.dateTime=?1")
+	public List<Ticket> getTicketByDate(LocalDateTime date);
+	
+	
+
+
+}

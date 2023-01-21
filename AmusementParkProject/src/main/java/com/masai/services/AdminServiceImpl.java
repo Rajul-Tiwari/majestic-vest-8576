@@ -30,13 +30,7 @@ public class AdminServiceImpl implements AdminService{
       ActivityDao acDao;
       @Autowired
       TicketDao tDao;
-//	@Override
-//	public Admin regAdmin(Admin ad) throws AdminException {
-//		// TODO Auto-generated method stub
-//		
-//		
-//		
-//	}
+
 
 	@Override
 	public Admin insertAdmin(Admin ad) {
@@ -114,8 +108,19 @@ public class AdminServiceImpl implements AdminService{
 	@Override
 	public List<Activity> getActivitiesForDays(Integer customerId, LocalDateTime fromdate, LocalDateTime toDate)
 			throws ActivityException {
-		// TODO Auto-generated method stub
-		return null;
+		
+		                                    Optional<Customer> opt= cDao.findById(customerId);
+		                                    Customer customer1=  opt.get();
+		         		                   List<Ticket> listTicket=  customer1.getTickets();
+		         		                   
+		         		           List<Ticket> listTicket1= tDao.getTicketBetweenDate(fromdate, toDate);
+		                                  List<Activity> listActivity = new ArrayList<>();
+		                                    listTicket1.forEach(t->listActivity.add(t.getActivity()));
+		                                    if(listActivity.size()==0) {
+		                                    	throw new ActivityException("No Activity found");
+ 		                                    }else {
+ 		                                    	return listActivity;
+ 		                                    }
 	}
 	 
 }

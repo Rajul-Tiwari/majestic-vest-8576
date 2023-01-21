@@ -38,6 +38,8 @@
 		<item key="SmartImportRootWizardPage.STORE_NESTED_PROJECTS" value="true"/>
 		<item key="SmartImportRootWizardPage.STORE_CONFIGURE_NATURES" value="true"/>
 		<list key="org.eclipse.ui.internal.wizards.datatransfer.SmartImportRootWizardPage.knownSources">
+			<item value="C:\Users\Abhinandan\OneDrive\Desktop\HHH\AmusementParkProject"/>
+			<item value="C:\Users\Abhinandan\OneDrive\Desktop\HHH"/>
 			<item value="C:\Users\Abhinandan\OneDrive\Desktop\SB201_Project\majestic-vest-8576"/>
 			<item value="C:\Users\LENOVO\Desktop\New folder\majestic-vest-8576\AmusementParkProject"/>
 		</list>

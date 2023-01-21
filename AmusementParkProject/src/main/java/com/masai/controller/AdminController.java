@@ -55,17 +55,30 @@ public class AdminController {
     	           List<Activity> activities= aService.getAllActivities(id);
     	return new ResponseEntity<List<Activity>>(activities,HttpStatus.ACCEPTED);
     }
-	@GetMapping("/getactivity")
+	@GetMapping("/getallactivity")
     public ResponseEntity<List<Activity>> getAllActivityHandler() throws ActivityException{
     	
     	           List<Activity> activities= aService.getAllActivities();
     	return new ResponseEntity<List<Activity>>(activities,HttpStatus.ACCEPTED);
 	}
-	@GetMapping("/getactivitybydate/{date}")
-    public ResponseEntity<List<Activity>> getAllActivityBByDateHandler(@PathVariable("date") LocalDateTime date) throws ActivityException{
-    	        System.out.println(date);
-    	           List<Activity> activities= aService.getActivitiesDatewise(date);
-    	return new ResponseEntity<List<Activity>>(activities,HttpStatus.ACCEPTED);
-    }
+@GetMapping("/getactivitybydate/{date}")
+    public ResponseEntity<List<Activity>> getAllActivityByDateHandler(@PathVariable("date") String date) throws ActivityException{
+		String dateString = date;
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSSSSS");
+		LocalDateTime parsedDate = LocalDateTime.parse(dateString, formatter);
+    	       List<Activity> activities= aService.getActivitiesDatewise(parsedDate);
+    return new ResponseEntity<List<Activity>>(activities,HttpStatus.ACCEPTED);
+		 }
+	@GetMapping("/getactivitybydateandcustomerid/{customerid}/{fromdate}/{todate}")
+    public ResponseEntity<List<Activity>> getAllActivityByDateandcustomeridHandler(@PathVariable("customerid") Integer customerid,@PathVariable("fromdate") String fromdate,@PathVariable("todate") String todate) throws ActivityException{
+		String dateString = fromdate;
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSSSSS");
+		LocalDateTime parsedDate = LocalDateTime.parse(dateString, formatter);
+		String dateString1 = todate;
+		DateTimeFormatter formatter1 = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSSSSS");
+		LocalDateTime parsedDate1 = LocalDateTime.parse(dateString1, formatter1);
+    	       List<Activity> activities= aService.getActivitiesForDays(customerid,parsedDate,parsedDate1);
+    return new ResponseEntity<List<Activity>>(activities,HttpStatus.ACCEPTED);
+		 }
 
 }
