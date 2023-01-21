@@ -135,14 +135,16 @@
 
 <td width="25%" align="center">
 <p dir="auto"><span>Admin Developer</span><br><br></p>
-<a><img src= height="100"></a>
+<a><img src="https://user-images.githubusercontent.com/105913917/213881683-27611aa3-469d-42b1-8c7b-d011d3ca0ff5.PNG"
+ height="100"></a>
 <p dir="auto"><span>Rajul Tiwari</span><br></p>
 </td>
 
 <td width="25%" align="center">
 <p dir="auto"><span>Admin Developer</span><br><br></p>
-<a><img src= height="100"></a>
-<p dir="auto"><span>Atal Kumar Pandey</span><br></p>
+<a><img src="https://user-images.githubusercontent.com/105913917/213882007-284fb978-f107-47ae-ad59-eb098291e924.PNG"
+height="100"></a>
+<p dir="auto"><span>Abhinandan Rauniyar</span><br></p>
 </td>
 
 <td width="25%" align="center">
@@ -155,7 +157,7 @@
 <p dir="auto"><span>User Developer</span><br><br></p>
 <a><img src="https://user-images.githubusercontent.com/105913917/213881240-fafb16a4-9a09-4015-81c2-a58b1164058e.png"
  height="100"></a>
-<p dir="auto"><span>Jainendra Singh</span><br></p>
+<p dir="auto"><span>Shivam Shahu</span><br></p>
 </td>
 
 </tr>
