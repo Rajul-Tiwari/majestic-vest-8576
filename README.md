@@ -4,7 +4,10 @@
 <p align="justify">In this project a detailed review of Amusement Park application. The main objectives of this project to know the package related to the Amusement Park and Activity with best facility and current offer. Searching will be very easy .At a single click will be able to fetch the required data.</p>
 
 
-
+<p></p>
+<p></p><p></p>
+<p></p>
+<p></p>
 
 
 
@@ -121,7 +124,7 @@
     </ul>
     <pre>
         <code>    server.port=<span class="hljs-number">8888</span>
-            spring<span class="hljs-selector-class">.datasource</span><span class="hljs-selector-class">.url</span>=jdbc:mysql:<span class="hljs-comment">//localhost:3306/ventureDB;</span>
+            spring<span class="hljs-selector-class">.datasource</span><span class="hljs-selector-class">.url</span>=jdbc:mysql:<span class="hljs-comment">//localhost:3306/amusementpark;</span>
             spring<span class="hljs-selector-class">.datasource</span><span class="hljs-selector-class">.driver-class-name</span>=com<span class="hljs-selector-class">.mysql</span><span class="hljs-selector-class">.cj</span><span class="hljs-selector-class">.jdbc</span><span class="hljs-selector-class">.Driver</span>
             spring<span class="hljs-selector-class">.datasource</span><span class="hljs-selector-class">.username</span>=root
             spring<span class="hljs-selector-class">.datasource</span><span class="hljs-selector-class">.password</span>=root
