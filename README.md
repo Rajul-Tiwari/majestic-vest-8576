@@ -1,6 +1,7 @@
 # majestic-vest-8576
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-To Create an Application for Amusement Park activity Booking 
+To Create an Application for Amusement Park activity Booking ![Amusement Park Logo](https://user-images.githubusercontent.com/105913917/213880141-03dff83e-ee79-49fa-8b39-f37a64943028.jpg)
+
 Customer should be able to view the list of available activities.
 Customer should be able to book cab for desired amusement activity.
 Admin should be able to perform below operations:
