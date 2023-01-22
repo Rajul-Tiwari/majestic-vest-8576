@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.masai.model.AdminLoginDTO;
 import com.masai.model.LoginDTO;
 import com.masai.services.LoginService;
 import com.masai.services.UserService;
@@ -49,9 +50,9 @@ public class LoginController {
 	}
 	
 	@PostMapping("/adminLogin")
-	public ResponseEntity<String> logInAdmin(@RequestBody LoginDTO dto) throws LoginException {
+	public ResponseEntity<String> logInAdmin(@RequestBody AdminLoginDTO dto) throws LoginException {
 
-		String result = userLogin.logIntoAccount(dto);
+		String result = userLogin.adminLogIntoAccount(dto);
 		if (result != null) {
 			AdminController.isLogin = true;
 		}
@@ -63,7 +64,7 @@ public class LoginController {
 	@PatchMapping("/adminLogout")
 	public String logoutAdmin(@RequestParam(required = false) String key) throws LoginException {
 		
-		String result = userLogin.logOutFromAccount(key);
+		String result = userLogin.adminLogOutFromAccount(key);
 		
 		if (result != null) {
 			AdminController.isLogin = false;

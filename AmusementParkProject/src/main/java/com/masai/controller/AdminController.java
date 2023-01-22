@@ -17,17 +17,23 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.masai.exception.ActivityException;
 import com.masai.exception.AdminException;
+import com.masai.exception.CustomerException;
+import com.masai.exception.LoginException;
 import com.masai.model.Activity;
 import com.masai.model.Admin;
-
+import com.masai.model.Customer;
 import com.masai.services.AdminService;
+import com.masai.services.UserService;
 
 @RestController
 public class AdminController {
 
 	@Autowired
 	private AdminService aService;
-	
+
+	@Autowired
+	private UserService cService;
+
 	public static boolean isLogin = false;
 
 	@PostMapping("/registerAdmin")
@@ -40,7 +46,7 @@ public class AdminController {
 	}
 
 	@PutMapping("/updateadmins")
-	public ResponseEntity<Admin> updateAdminHandler(@RequestBody Admin admin) throws AdminException {
+	public ResponseEntity<Admin> updateAdminHandler(@RequestBody Admin admin) throws AdminException, LoginException {
 
 		Admin ad = aService.updateAdmin(admin);
 		return new ResponseEntity<Admin>(ad, HttpStatus.ACCEPTED);
@@ -96,4 +102,23 @@ public class AdminController {
 		return new ResponseEntity<List<Activity>>(activities, HttpStatus.ACCEPTED);
 	}
 
+	@GetMapping("/allCustomer")
+	public ResponseEntity<Object> getAllCustomer() throws CustomerException {
+		if (isLogin) {
+			List<Customer> customerList = cService.getAllCustomer();
+			return new ResponseEntity<>(customerList, HttpStatus.OK);
+		} else {
+			return new ResponseEntity<>("Please, Login first!", HttpStatus.OK);
+		}
+	}
+
+	@DeleteMapping("/{customerId}")
+	public ResponseEntity<String> deleteCustomer(@PathVariable("customerId") Integer customerId)
+			throws CustomerException {
+		if (isLogin) {
+			return new ResponseEntity(cService.deleteCustomer(customerId), HttpStatus.OK);
+		} else {
+			return new ResponseEntity<>("Please, Login first!", HttpStatus.OK);
+		}
+	}
 }
