@@ -9,10 +9,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.masai.model.Admin;
+import com.masai.model.AdminLoginDTO;
+import com.masai.model.CurrentAdminSession;
 import com.masai.model.CurrentUserSession;
 import com.masai.model.Customer;
 import com.masai.model.LoginDTO;
 import com.masai.repository.AdminDao;
+import com.masai.repository.AdminSessionDao;
 import com.masai.repository.CustomerDao;
 import com.masai.repository.SessionDao;
 
@@ -26,7 +29,10 @@ public class LoginServiceImpl implements LoginService {
 
 	@Autowired
 	private CustomerDao cDao;
-
+	
+	@Autowired
+	private AdminSessionDao aSessionDao;
+	
 	@Autowired
 	private SessionDao sDao;
 	
@@ -81,7 +87,7 @@ public class LoginServiceImpl implements LoginService {
 	}
 
 	@Override
-	public String adminLogIntoAccount(LoginDTO dto) throws LoginException {
+	public String adminLogIntoAccount(AdminLoginDTO dto) throws LoginException {
 		
 		Admin existingAdmin = adminDao.findByEmail(dto.getEmail());
 
@@ -89,21 +95,21 @@ public class LoginServiceImpl implements LoginService {
 			throw new LoginException("Please Enter a valid email or password");
 		}
 
-		Optional<CurrentUserSession> validCustomerSessionOpt = sDao.findById(existingAdmin.getAdminID());
+		Optional<CurrentAdminSession> validAdminSessionOpt = aSessionDao.findById(existingAdmin.getAdminID());
 
-		if (validCustomerSessionOpt.isPresent()) {
+		if (validAdminSessionOpt.isPresent()) {
 			throw new LoginException("User already Logged In with this number");
 		}
 
 		if (existingAdmin.getPassword().equals(dto.getPassword())) {
 			String key = RandomString.make(6);
-			CurrentUserSession currentUserSession = new CurrentUserSession(existingAdmin.getAdminID(), key,
+			CurrentAdminSession currentAdminSession = new CurrentAdminSession(existingAdmin.getAdminID(), key,
 					LocalDateTime.now());
-			sDao.save(currentUserSession);
+			aSessionDao.save(currentAdminSession);
 			
 			admin = existingAdmin;
 			
-			return currentUserSession.toString();
+			return currentAdminSession.toString();
 
 		} else
 			throw new LoginException("Please Enter a valid password");
@@ -113,7 +119,7 @@ public class LoginServiceImpl implements LoginService {
 	@Override
 	public String adminLogOutFromAccount(String key) throws LoginException {
 		
-		CurrentUserSession validAdminSession = sDao.findByUuid(key);
+		CurrentAdminSession validAdminSession = aSessionDao.findByUuid(key);
 
 		if (validAdminSession == null) {
 			
@@ -121,7 +127,7 @@ public class LoginServiceImpl implements LoginService {
 
 		}
 
-		sDao.delete(validAdminSession);
+		aSessionDao.delete(validAdminSession);
 		
 		admin = null;
 		

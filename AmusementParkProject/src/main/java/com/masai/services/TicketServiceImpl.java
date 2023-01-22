@@ -124,23 +124,14 @@ public class TicketServiceImpl implements TicketService {
 			throw new LoginException("Please login first");
 		}
 
-//		Optional<Customer> optCustomer = cDao.findById(customerId);
 
-//		if (optCustomer.isPresent()) {
+		List<Ticket> tickets = tDao.getAllTicketsByCustomerId(LoginServiceImpl.customer.getCustomerID());
 
-			List<Ticket> tickets = tDao.getAllTicketsByCustomerId(LoginServiceImpl.customer.getCustomerID());
-
-			if (tickets.isEmpty()) {
-				throw new TicketException("Tickets is empty");
-			} else {
-				return tickets;
-			}
-
-//		} else {
-//
-//			throw new CustomerException("Please enter valid customer id");
-//
-//		}
+		if (tickets.isEmpty()) {
+			throw new TicketException("Tickets is empty");
+		} else {
+			return tickets;
+		}
 
 	}
 
@@ -151,33 +142,24 @@ public class TicketServiceImpl implements TicketService {
 			throw new LoginException("Please login first");
 		}
 
-//		Optional<Customer> optCustomer = cDao.findById(customerId);
+		TripBookingDTO tripDto = new TripBookingDTO();
 
-//		if (optCustomer.isPresent()) {
+		tripDto.setCustomer(LoginServiceImpl.customer);
 
-			TripBookingDTO tripDto = new TripBookingDTO();
+		List<Ticket> tickets = tDao.getAllTicketsByCustomerId(LoginServiceImpl.customer.getCustomerID());
 
-			tripDto.setCustomer(LoginServiceImpl.customer);
+		tripDto.setTickets(tickets);
 
-			List<Ticket> tickets = tDao.getAllTicketsByCustomerId(LoginServiceImpl.customer.getCustomerID());
+		int totalAmount = 0;
 
-			tripDto.setTickets(tickets);
+		for (Ticket t : tickets) {
+			totalAmount += t.getActivity().getCharge();
+		}
 
-			int totalAmount = 0;
+		tripDto.setTotalAmount(totalAmount);
 
-			for (Ticket t : tickets) {
-				totalAmount += t.getActivity().getCharge();
-			}
+		return tripDto;
 
-			tripDto.setTotalAmount(totalAmount);
-
-			return tripDto;
-
-//		} else {
-//
-//			throw new CustomerException("Please enter valid customer id");
-//
-//		}
 
 	}
 }

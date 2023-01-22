@@ -63,7 +63,7 @@ public class ActivityController {
 
 	}
 
-	@GetMapping("/countctivityOfCharges")
+	@GetMapping("/countActivityOfCharges")
 	public ResponseEntity<Integer> countActivityofCharges(float charges) throws ActivityException, LoginException {
 
 		int aCount = aService.countActivityofCharges(charges);

@@ -52,23 +52,6 @@ public class UserController {
 		}
 	}
 
-	@DeleteMapping("/{customerId}")
-	public ResponseEntity<String> deleteCustomer(@PathVariable("customerId") Integer customerId)
-			throws CustomerException {
-
-		return new ResponseEntity(cService.deleteCustomer(customerId), HttpStatus.OK);
-	}
-
-	@GetMapping("/allCustomer")
-	public ResponseEntity<Object> getAllCustomer() throws CustomerException {
-		if (isLogin) {
-			List<Customer> customerList = cService.getAllCustomer();
-			return new ResponseEntity<>(customerList, HttpStatus.OK);
-		} else {
-			return new ResponseEntity<>("Please, Login first!", HttpStatus.OK);
-		}
-	}
-
 	@GetMapping("/getAllActivity")
 	public ResponseEntity<List<Activity>> getAllactivity() throws ActivityException {
 

@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.masai.exception.ActivityException;
 import com.masai.exception.AdminException;
+import com.masai.exception.LoginException;
 import com.masai.model.Activity;
 import com.masai.model.Admin;
 
@@ -12,7 +13,7 @@ public interface AdminService {
 	
 	public Admin insertAdmin(Admin admin);
 
-	public Admin updateAdmin(Admin admin) throws AdminException;
+	public Admin updateAdmin(Admin admin) throws AdminException, LoginException;
 
 	public Admin deleteAdmin(Integer adminId) throws AdminException;
 
